@@ -11,20 +11,56 @@ public class Main {
 
         char[] chars = input.toCharArray();
 
-        printResult(chars);
+        String binaryString = charsIntoBinaryString(chars);
+
+        String chuckNorrisString = binaryStringIntoChuckNorrisString(binaryString);
+
+        printResult(chuckNorrisString);
     }
 
-    private static void printResult(char[] chars) {
-        System.out.println("The result:");
+    private static String binaryStringIntoChuckNorrisString(String binaryString) {
+        StringBuilder sb = new StringBuilder();
 
-        String output;
+        if (binaryString.charAt(0) == '1') {
+            sb.append("0 0");
+        } else {
+            sb.append("00 0");
+        }
+
+        for (int i = 1; i < binaryString.length(); i++) {
+            if (binaryString.charAt(i) == binaryString.charAt(i - 1)) {
+                sb.append("0");
+            } else {
+                if (binaryString.charAt(i) == '1') {
+                    sb.append(" 0 0");
+                } else {
+                    sb.append(" 00 0");
+                }
+            }
+        }
+
+        return sb.toString();
+    }
+
+    private static String charsIntoBinaryString(char[] chars) {
+        StringBuilder sb = new StringBuilder();
+        String binary;
         String digits;
         for (char ch : chars) {
             digits = Integer.toBinaryString(ch);
-            output = String.format("%c = %07d", ch, Integer.parseInt(digits) );
-            System.out.println(output);
+            binary = String.format("%07d", Integer.parseInt(digits) );
+            sb.append(binary);
         }
+        return sb.toString();
     }
+
+
+    private static void printResult(String output) {
+        System.out.println("The result:");
+        System.out.println(output);
+
+    }
+
 
 
 }

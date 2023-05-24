@@ -9,7 +9,22 @@ public class Main {
         System.out.println("Input string:");
         String input = scanner.nextLine();
 
-        String output = String.join(" ", input.split(""));
-        System.out.println(output);
+        char[] chars = input.toCharArray();
+
+        printResult(chars);
     }
+
+    private static void printResult(char[] chars) {
+        System.out.println("The result:");
+
+        String output;
+        String digits;
+        for (char ch : chars) {
+            digits = Integer.toBinaryString(ch);
+            output = String.format("%c = %07d", ch, Integer.parseInt(digits) );
+            System.out.println(output);
+        }
+    }
+
+
 }
